@@ -2,7 +2,7 @@
 # for the driver, the owner, the insurance, the assistance and drivy
 class CalculateCommissionsService
 
-  attr_reader :actions
+  attr_reader :actions, :errors
 
   def initialize(number_of_days, price, options)
     @price = price
@@ -10,9 +10,13 @@ class CalculateCommissionsService
     @options = options
     @additional_owner_fee = 0
     @additional_drivy_fee = 0
+    @errors = []
   end
 
   def call
+    @errors << 'missing at least one argument' and return unless @price && @number_of_days &&
+        @options
+
     insurance_fee = (@price * 0.3 * 0.5).round
     assistance_fee = @number_of_days * 100
     drivy_fee = @price * 0.3 - (insurance_fee + assistance_fee)
