@@ -21,7 +21,9 @@ input['rentals'].each do |rental|
   calculate_commissions_service = CalculateCommissionsService.new(number_of_days, price, options)
   calculate_commissions_service.call
 
-  actions = calculate_commissions_service.actions if calculate_commissions_service.errors.empty?
+  return calculate_commissions_service.errors unless calculate_commissions_service.errors.empty?
+
+  actions = calculate_commissions_service.actions
 
   output << {
     id: rental['id'],
