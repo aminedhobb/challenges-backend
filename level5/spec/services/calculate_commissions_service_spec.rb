@@ -83,7 +83,7 @@ RSpec.describe CalculateCommissionsService do
             {
               who: 'driver',
               type: 'debit',
-              amount: price + number_of_days * 500 
+              amount: price + number_of_days * 500
             },
             {
               who: 'owner',
@@ -139,7 +139,7 @@ RSpec.describe CalculateCommissionsService do
             {
               who: 'driver',
               type: 'debit',
-              amount: price + number_of_days * 200 
+              amount: price + number_of_days * 200
             },
             {
               who: 'owner',
@@ -186,7 +186,7 @@ RSpec.describe CalculateCommissionsService do
 
       end
 
-      context 'when only the additional insurance option is selected' do 
+      context 'when only the additional insurance option is selected' do
 
         let(:options) { %w[additional_insurance] }
 
@@ -242,7 +242,7 @@ RSpec.describe CalculateCommissionsService do
         end
 
       end
-      
+
       context 'when no options are selected' do
 
         let(:options) { %w[] }
@@ -252,7 +252,7 @@ RSpec.describe CalculateCommissionsService do
             {
               who: 'driver',
               type: 'debit',
-              amount: price 
+              amount: price
             },
             {
               who: 'owner',
@@ -272,7 +272,7 @@ RSpec.describe CalculateCommissionsService do
             {
               who: 'drivy',
               type: 'credit',
-              amount: ((price * 0.3) - ((price * 0.3 * 0.5).floor + number_of_days * 100)).floor 
+              amount: ((price * 0.3) - ((price * 0.3 * 0.5).floor + number_of_days * 100)).floor
             }
           ]
         end
