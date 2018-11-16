@@ -12,6 +12,7 @@ input['rentals'].each do |rental|
   number_of_days = (Date.parse(rental['end_date']) - Date.parse(rental['start_date'])).to_i + 1
   price = price_by_time(number_of_days, car['price_per_day']).round +
     rental['distance'] * car['price_per_km']
+
   output << { id: rental['id'], price: price }
 end
 
