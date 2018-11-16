@@ -10,16 +10,16 @@ class CalculateCommissionsService
     @options = options
     @additional_owner_fee = 0
     @additional_drivy_fee = 0
-    @errors = []
+    @errors = ''
   end
 
   def call
-    @errors << 'missing at least one argument' and return unless @price && @number_of_days &&
+    @errors << 'arguments cannot be nil' and return unless @price && @number_of_days &&
         @options
 
-    insurance_fee = (@price * 0.3 * 0.5).round
+    insurance_fee = (@price * 0.3 * 0.5).floor
     assistance_fee = @number_of_days * 100
-    drivy_fee = @price * 0.3 - (insurance_fee + assistance_fee)
+    drivy_fee = (@price * 0.3) - (insurance_fee + assistance_fee)
 
     check_for_options
     render_actions(insurance_fee, assistance_fee, drivy_fee)
@@ -50,7 +50,7 @@ class CalculateCommissionsService
       {
         who: 'owner',
         type: 'credit',
-        amount: (@price * 0.7).round + @additional_owner_fee
+        amount: (@price * 0.7).ceil + @additional_owner_fee
       },
       {
         who: 'insurance',
@@ -65,7 +65,7 @@ class CalculateCommissionsService
       {
         who: 'drivy',
         type: 'credit',
-        amount: drivy_fee.round + @additional_drivy_fee
+        amount: drivy_fee.floor + @additional_drivy_fee
       }
     ]
   end
