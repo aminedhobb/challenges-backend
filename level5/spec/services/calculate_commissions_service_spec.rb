@@ -245,7 +245,7 @@ RSpec.describe CalculateCommissionsService do
 
       context 'when no options are selected' do
 
-        let(:options) { %w[] }
+        let(:options) { [] }
 
         let(:expected_array) do
           [
